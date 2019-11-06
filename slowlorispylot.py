@@ -28,7 +28,7 @@ def generate_requests(ip, port, socket_count):
             s = create_socket_and_send_http_get(ip, port)
         except socket.error:
             #Close the socket in case of error
-            if s:
+            if 's' in locals():
                 s.close()
             break
         #Add the generated socket to the list
@@ -47,8 +47,8 @@ def send_keep_alive(ip, port, socket_count, socket_list, timer):
                     s.send("X-a {}\r\n".format(random.randint(1, 5000)).encode('UTF-8'))
                 except socket.error:
                     #In case of an error, remove the socket from the active list and close it
-                    socket_list.remove(s)
-                    if s:
+                    if 's' in locals():
+                        socket_list.remove(s)
                         s.close
 
             #Get the number of inactive sockets by comparing the number of active sockets and the socket_count paramater
