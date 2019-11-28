@@ -44,7 +44,7 @@ def send_keep_alive(ip, port, socket_count, socket_list, timer):
             print("Sending keep alive to {} active sockets".format(len(socket_list)))
             for s in socket_list:
                 try:
-                    s.send("X-a {}\r\n".format(random.randint(1, 5000)).encode('UTF-8'))
+                    s.send("X-a: {}\r\n".format(random.randint(1, 5000)).encode('UTF-8'))
                 except socket.error:
                     #In case of an error, remove the socket from the active list and close it
                     if 's' in locals():
